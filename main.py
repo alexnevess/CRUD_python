@@ -18,15 +18,21 @@ import re
 #     else:
 #         print("Digite um CPF válido")
 
+# while True:
+#     try:
+#         age = int(input("Idade:"))
+#         if age > 0 and age < 100:
+#             break
+#         else:
+#             print("Digite uma idade válida!")
+#     except ValueError:
+#         print("Digite um número válido")
+
 while True:
-    try:
-        age = int(input("Idade:"))
-        if age > 0 and age < 100:
-            break
-        else:
-            print("Digite uma idade válida!")
-    except ValueError:
-        print("Digite um número válido")
-# email = input("Email:")
+    email = input("Email:")
+    if "@" in email and "." in email:
+        break
+    else:
+        print("Digite um email válido")
 # date = input("Data")
 
