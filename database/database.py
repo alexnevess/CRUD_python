@@ -13,3 +13,10 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS customer(
 
 con.commit()
 con.close()
+
+def register_customer(name, cpf, age, email, date_register):
+    con = sqlite3.connect("database.db")
+    cursor_register = con.cursor()
+    cursor_register.execute("""INSERT INTO customer(name, cpf, age, email, date) VALUES(?,?,?,?,?)""", (name, cpf, age, email, date_register))
+    con.commit()
+    con.close()
