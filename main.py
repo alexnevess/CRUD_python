@@ -1,8 +1,8 @@
-from database.database import register_customer
+from database.database import register_customer, show_customers
 import re
 from datetime import date
 
-print("1.Cadastrar\n2.Ler")
+print("1.Cadastrar\n2.Mostrar tabela")
 var_menu = int(input("Escolha uma  operação:"))
 
 match var_menu:
@@ -46,4 +46,9 @@ match var_menu:
         register_customer(name, new_cpf, age, email, str(date_register))
     
     case 2:
-        print("teste")
+        result = show_customers()
+
+        print("ID|Nome                |CPF        |Idade|email                         |Data")
+        print("-----------------------------------------------------------------------------")
+        for id, name, cpf, age, email, date in result:
+            print(f'{id:<2}|{name:<20}|{cpf}|{age:<5}|{email:<30}|{date}')

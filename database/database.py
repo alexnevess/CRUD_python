@@ -20,3 +20,11 @@ def register_customer(name, cpf, age, email, date_register):
     cursor_register.execute("""INSERT INTO customer(name, cpf, age, email, date) VALUES(?,?,?,?,?)""", (name, cpf, age, email, date_register))
     con.commit()
     con.close()
+
+def show_customers():
+    con = sqlite3.connect("database.db")
+    cursor_show = con.cursor()
+    cursor_show.execute("SELECT * FROM customer")
+    result = cursor_show. fetchall()
+    con.close()
+    return result
