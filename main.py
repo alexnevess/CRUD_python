@@ -1,6 +1,7 @@
 from database.database import register_customer, show_customers
 import re
 from datetime import date
+from prompt_toolkit import prompt
 
 print("1.Cadastrar\n2.Mostrar tabela")
 var_menu = int(input("Escolha uma  operação:"))
@@ -8,7 +9,7 @@ var_menu = int(input("Escolha uma  operação:"))
 match var_menu:
     case 1:
         while True: # Utilizalção de while true break para validação de name
-            name = input("Nome:")
+            name = prompt("Nome: ", default = "")
             len_name = len(name)
             if len_name < 20 and len_name > 0 and name.replace(" ","").isalpha(): # Utiliza replace (retira os espaços) e isalpha para validar se os caracteres são válidos (apenas letras)
                 break
@@ -16,7 +17,7 @@ match var_menu:
                 print("Digite um nome válido!!!")
 
         while True:      
-            cpf = input("CPF:")
+            cpf = prompt("CPF: ", default = "")
             new_cpf = re.sub(r"\D", "", cpf, count=0, flags=0)
             len_cpf = len(new_cpf)
             if len_cpf == 11:
@@ -26,7 +27,7 @@ match var_menu:
 
         while True:
             try:
-                age = int(input("Idade:"))
+                age = int(prompt("Idade: ", default = ""))
                 if age > 0 and age < 100:
                     break
                 else:
@@ -35,7 +36,7 @@ match var_menu:
                 print("Digite um número válido")
 
         while True:
-            email = input("Email:")
+            email = prompt("email: ", default = "")
             if "@" in email and "." in email:
                 break
             else:
