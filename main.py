@@ -1,47 +1,16 @@
 from database.database import register_customer, show_customers
-import re
+from functions.functions import validate_name, validate_cpf, validate_age, validate_email
 from datetime import date
-from prompt_toolkit import prompt
 
 print("1.Cadastrar\n2.Mostrar tabela")
 var_menu = int(input("Escolha uma  operação:"))
 
 match var_menu:
     case 1:
-        while True: # Utilizalção de while true break para validação de name
-            name = prompt("Nome: ", default = "")
-            len_name = len(name)
-            if len_name < 20 and len_name > 0 and name.replace(" ","").isalpha(): # Utiliza replace (retira os espaços) e isalpha para validar se os caracteres são válidos (apenas letras)
-                break
-            else:
-                print("Digite um nome válido!!!")
-
-        while True:      
-            cpf = prompt("CPF: ", default = "")
-            new_cpf = re.sub(r"\D", "", cpf, count=0, flags=0)
-            len_cpf = len(new_cpf)
-            if len_cpf == 11:
-                break
-            else:
-                print("Digite um CPF válido")
-
-        while True:
-            try:
-                age = int(prompt("Idade: ", default = ""))
-                if age > 0 and age < 100:
-                    break
-                else:
-                    print("Digite uma idade válida!")
-            except ValueError:
-                print("Digite um número válido")
-
-        while True:
-            email = prompt("email: ", default = "")
-            if "@" in email and "." in email:
-                break
-            else:
-                print("Digite um email válido")
-
+        name = validate_name()
+        new_cpf = validate_cpf()        
+        age = validate_age()
+        email = validate_email()
         date_register = date.today()
 
         register_customer(name, new_cpf, age, email, str(date_register))
