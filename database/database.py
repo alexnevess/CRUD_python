@@ -28,3 +28,18 @@ def show_customers():
     result = cursor_show. fetchall()
     con.close()
     return result
+
+def search_customer(cpf):
+    con = sqlite3.connect("database.db")
+    cursor_search = con.cursor()
+    cursor_search.execute("SELECT name, cpf, age, email FROM customer WHERE cpf = ?", (cpf,))
+    result = cursor_search.fetchone()
+    con.close()
+    return result
+
+def update_customer(old_cpf, name_update, cpf_update, age_update, email_update, date_update):
+    con = sqlite3.connect("database.db")
+    cursor_update = con.cursor()
+    cursor_update.execute("UPDATE customer SET name = ?, cpf = ?, age = ?, email = ?, date = ? WHERE cpf = ?", (name_update, cpf_update, age_update, email_update, date_update, old_cpf))
+    con.commit()
+    con.close()

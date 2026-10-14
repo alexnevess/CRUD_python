@@ -1,8 +1,8 @@
-from database.database import register_customer, show_customers
+from database.database import register_customer, show_customers, search_customer, update_customer
 from functions.functions import validate_name, validate_cpf, validate_age, validate_email
 from datetime import date
 
-print("1.Cadastrar\n2.Mostrar tabela")
+print("1.Cadastrar\n2.Mostrar tabela\n3.Atualizar")
 var_menu = int(input("Escolha uma  operação:"))
 
 match var_menu:
@@ -22,3 +22,16 @@ match var_menu:
         print("-----------------------------------------------------------------------------")
         for id, name, cpf, age, email, date in result:
             print(f'{id:<2}|{name:<20}|{cpf}|{age:<5}|{email:<30}|{date}')
+
+    case 3:
+        search = input("Pesquise um registro pelo CPF: ")
+        old_cpf = search
+        search = search_customer(search)
+
+        name_update = validate_name(search[0])
+        cpf_update = validate_cpf(str(search[1]))
+        age_update = validate_age(str(search[2]))
+        email_update = validate_email(search[3])
+        date_update = date.today()
+
+        update_customer(old_cpf, name_update, cpf_update, age_update, email_update, date_update)
